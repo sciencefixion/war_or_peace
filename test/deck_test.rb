@@ -50,7 +50,14 @@ class DeckTest < Minitest::Test
     assert_equal [@card1, @card3], deck.high_ranking_cards
   end
 
-  #this is a change for test_branch
-  #this is a second change
+  def test_percent_high_ranking
+
+    deck = Deck.new(@card1, @card2, @card3)
+
+
+    assert_equal 66.67, deck.percent_high_ranking
+  end
+
+
 
 end
