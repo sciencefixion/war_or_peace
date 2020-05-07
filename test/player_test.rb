@@ -39,6 +39,26 @@ class PlayerTest < Minitest::Test
     assert_instance_of Deck, player.deck
   end
 
-  
+  def test_it_knows_has_lost?
+
+    deck = Deck.new(@card1, @card2, @card3)
+    player = Player.new('Clarisa', deck)
+
+
+    assert_equal false, player.has_lost?
+
+    player.deck.remove_card
+
+    assert_equal false, player.has_lost?
+
+    player.deck.remove_card
+
+    assert_equal false, player.has_lost?
+
+    player.deck.remove_card
+
+    assert_equal true, player.has_lost?
+
+  end
 
 end

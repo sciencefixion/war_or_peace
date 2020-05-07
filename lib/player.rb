@@ -7,6 +7,14 @@ class Player
     @deck = deck
   end
 
+  def has_lost?
 
+    if @deck.cards == []
+      true
+    else
+      false
+    end 
+
+  end
 
 end
