@@ -41,11 +41,12 @@ class Deck
 
     percent_to_two_decimals = (num_high_ranking / total_cards * 100.00).round(2)
   end
-  #
-  # def remove_card
-  #
-  # end
-  #
+
+  def remove_card
+
+    @cards.shift
+  end
+
   # def add_card
   #
   # end
