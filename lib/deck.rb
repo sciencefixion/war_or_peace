@@ -30,16 +30,8 @@ class Deck
   def percent_high_ranking
 
     total_cards = @cards.count
-    num_high_ranking = 0.0
 
-    @cards.each do |num|
-      if num.rank >= 11
-        num_high_ranking += 1.0
-
-      end
-    end
-
-    percent_to_two_decimals = (num_high_ranking / total_cards * 100.00).round(2)
+    percent_to_two_decimals = (high_ranking_cards.length.to_f / total_cards * 100.00).round(2)
   end
 
   def remove_card
