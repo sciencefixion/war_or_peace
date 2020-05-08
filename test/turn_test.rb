@@ -25,6 +25,7 @@ class TurnTest < Minitest::Test
     @player2 = Player.new("Aurora", @deck2)
 
     @turn = Turn.new(@player1, @player2)
+
   end
 
   def test_it_exists
@@ -39,5 +40,25 @@ class TurnTest < Minitest::Test
     assert_equal @player1, @turn.player1
     assert_equal @player2, @turn.player2
   end
+
+  def test_spoils_of_war_is_an_empty_array
+
+
+    assert_equal [], @turn.spoils_of_war
+  end
+
+  def test_it_can_tell_type
+
+
+    assert_equal :basic, @turn.type
+  end
+
+  def test_it_can_tell_winner
+
+
+    assert_equal @player1, @turn.winner
+  end
+
+
 
 end
