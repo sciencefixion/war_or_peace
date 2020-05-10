@@ -1,4 +1,3 @@
-
 class Player
   attr_reader :name, :deck
 
@@ -13,7 +12,7 @@ class Player
       true
     else
       false
-    end 
+    end
 
   end
 
