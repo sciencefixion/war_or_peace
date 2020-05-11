@@ -58,7 +58,15 @@ class GameTest < Minitest::Test
     assert_equal true, game.organize_peace
   end
 
-  
+  def test_it_can_end_in_a_draw
+
+    game = Game.new
+    game.shuffle_and_deal
+
+    game.round = 1000001
+
+    assert_equal true, game.organize_peace
+  end
 
   def test_it_can_start
     skip
