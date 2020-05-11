@@ -1,6 +1,6 @@
 
 class Game
-  attr_reader :round, :all_cards, :challenger1, :challenger2, :peace
+  attr_accessor :round, :all_cards, :challenger1, :challenger2, :peace
 
   def initialize
 
@@ -116,22 +116,22 @@ class Game
 
     if @challenger1.has_lost? == true
 
-      p "*~*~*~* #{@challenger2} has won the game! *~*~*~*"
+      p "*~*~*~* #{@challenger2.name} has won the game! *~*~*~*"
 
-      true
+      @peace = true
     elsif @challenger2.has_lost? == true
 
-      p "*~*~*~* #{@challenger1} has won the game! *~*~*~*"
+      p "*~*~*~* #{@challenger1.name} has won the game! *~*~*~*"
 
-      true
+      @peace = true
     elsif  @round == 1000001
 
       p "---- DRAW ----"
 
-      @peace == true
+      @peace = true
     else
 
-      @peace == false
+      @peace = false
     end
   end
 
@@ -140,7 +140,7 @@ class Game
   def start
 
     while @peace == false
-      #code 
+      #code
 
     end
   end

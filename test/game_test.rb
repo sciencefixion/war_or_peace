@@ -41,12 +41,24 @@ class GameTest < Minitest::Test
     assert_equal 26, game.challenger2.deck.cards.count
   end
 
-  def test_peace_can_be_organized
-    skip
-    game = Game.new
-    game.shuffle_and_deal
+  def test_challenger2_can_win
 
+    game = Game.new
+
+    assert_equal true, game.organize_peace
   end
+
+  def test_challenger1_can_win
+
+    game = Game.new
+
+    game.challenger1.deck.cards << game.all_cards.flatten!
+
+
+    assert_equal true, game.organize_peace
+  end
+
+  
 
   def test_it_can_start
     skip
