@@ -22,12 +22,12 @@ class GameTest < Minitest::Test
     assert_equal 52, game.all_cards.count
   end
 
-  def test_it_can_have_players
+  def test_it_can_have_challengers
 
     game = Game.new
 
-    assert_instance_of Player, game.player1
-    assert_instance_of Player, game.player2
+    assert_instance_of Player, game.challenger1
+    assert_instance_of Player, game.challenger2
   end
 
   def test_it_can_shuffle_cards_and_deal
@@ -37,22 +37,24 @@ class GameTest < Minitest::Test
     game.shuffle_and_deal
 
 
-    assert_equal 26, game.player1.deck.cards.count
-    assert_equal 26, game.player2.deck.cards.count
+    assert_equal 26, game.challenger1.deck.cards.count
+    assert_equal 26, game.challenger2.deck.cards.count
+  end
+
+  def test_peace_can_be_organized
+    skip
+    game = Game.new
+    game.shuffle_and_deal
+
   end
 
   def test_it_can_start
-
-    game = Game.new
-
-    
-  end
-
-  def test_it_can_end
     skip
+    game = Game.new
+    game.shuffle_and_deal
+    game.start
 
   end
-
 
 
 end

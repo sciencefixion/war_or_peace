@@ -1,10 +1,10 @@
 
 class Game
-  attr_reader :turn_number, :all_cards, :player1, :player2, :deck1, :deck2
+  attr_reader :round, :all_cards, :challenger1, :challenger2, :peace
 
   def initialize
 
-    @turn_number = turn_number
+    @round = 0
 
     @all_cards =[
     card1 = Card.new(:heart, 'Ace', 14),
@@ -60,12 +60,11 @@ class Game
     card51 = Card.new(:club, 'Queen', 12),
     card52 = Card.new(:club, 'King', 13)]
 
-    @deck1 = Deck.new()
-    @deck2 = Deck.new()
+    @pile1 = Deck.new()
+    @pile2 = Deck.new()
 
-    @player1 = Player.new("Megan", @deck1)
-    @player2 = Player.new("Aurora", @deck2)
-
+    @challenger1 = Player.new("Megan", @pile1)
+    @challenger2 = Player.new("Aurora", @pile2)
   end
 
   def shuffle_and_deal
@@ -74,30 +73,21 @@ class Game
 
     cut = @all_cards.each_slice(26).to_a
 
-    @deck1 = cut[0]
-    @deck2 = cut[1]
+    @pile1 = cut[0]
+    @pile2 = cut[1]
 
-    @deck1.each do |card|
+    @pile1.each do |card|
 
-      @player1.deck.cards << card
-
+      @challenger1.deck.cards << card
     end
 
-    @deck2.each do |card|
+    @pile2.each do |card|
 
-      @player2.deck.cards << card
+      @challenger2.deck.cards << card
     end
-
   end
 
-
-  def start
-
-    # loop do?
-    #
-    # end
-
-    turn_number = 1
+  def welcome
 
     puts 'Welcome to War! (or Peace)'
     puts'This game will be played with 52 cards.'
@@ -105,24 +95,111 @@ class Game
     puts 'Type \'GO\' to start the game!'
     puts '------------------------------------------------------------------'
 
-    ready = gets.chomp.strip.upcase
+    while user_input = gets.chomp.strip.upcase
+      case user_input
+      when 'GO'
 
-    if ready == 'GO'
 
 
-      # game.start
+        shuffle_and_deal
+        break
+      else
 
-    else
-
-      p 'Invalid input. Please restart.'
-
+        puts 'Invalid input. Please try again.'
+        puts '--------------------------------------------------------------'
+      end
     end
-
-    turn = Turn.new(player1, player2)
-    #shuffle cards and deal
-
-    #
-
   end
 
+
+  def organize_peace
+
+    if @challenger1.has_lost? == true
+
+      p "*~*~*~* #{@challenger2} has won the game! *~*~*~*"
+
+      true
+    elsif @challenger2.has_lost? == true
+
+      p "*~*~*~* #{@challenger1} has won the game! *~*~*~*"
+
+      true
+    elsif  @round == 1000001
+
+      p "---- DRAW ----"
+
+      @peace == true
+    else
+
+      @peace == false
+    end
+  end
+
+
+
+  def start
+
+    while @peace == false
+      #code 
+
+    end
+  end
 end
+#   def start
+#
+#     if @round > 10 do
+#
+#       if @round < 10
+#
+#         turn = Turn.new(@challenger1, @challenger2)
+#
+#         if turn.type == :basic
+#
+#           p "Turn #{@round}: #{turn.winner} won 2 cards"
+#
+#           winner = turn.winner
+#
+#
+#           turn.pile_cards
+#           turn.award_spoils(winner)
+#
+#         elsif turn.type == :war
+#
+#           p "Turn #{@round}: WAR - #{turn.winner} won 6 cards"
+#
+#           winner = turn.winner
+#
+#
+#           turn.pile_cards
+#           turn.award_spoils(winner)
+#
+#         else
+#
+#           p "Turn #{@round}: *mutually assured destruction* 6 cards were removed from play"
+#
+#           winner = turn.winner
+#
+#
+#           turn.pile_cards
+#           turn.award_spoils(winner)
+#         end
+#
+#
+#         if @challenger2.has_lost? == true
+#
+#           p '*~*~*~* #{@challenger1.name} has won the game! *~*~*~*'
+#           break
+#         elsif @challenger1.has_lost? == true
+#
+#           p '*~*~*~* #{@challenger2.name} has won the game! *~*~*~*'
+#           break
+#         else
+#
+#           @round += 1
+#         end
+#     else
+#       p '---- DRAW ----'
+#       break
+#       end
+#     end
+#   end
