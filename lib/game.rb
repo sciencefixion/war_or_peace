@@ -1,10 +1,15 @@
 
 class Game
-  attr_accessor :round, :all_cards, :challenger1, :challenger2, :peace
+  attr_accessor :round,
+                :all_cards,
+                :challenger1,
+                :challenger2,
+                :peace
 
   def initialize
 
     @round = 0
+    @peace = false
 
     @all_cards =[
     card1 = Card.new(:heart, 'Ace', 14),
@@ -139,67 +144,47 @@ class Game
 
   def start
 
-    while @peace == false
-      #code
+    welcome
 
+    while @peace == false
+
+      @round += 1
+
+
+      turn = Turn.new(@challenger1, @challenger2)
+
+      if turn.type == :basic
+
+        p "Turn #{@round}: #{turn.winner} won 2 cards"
+
+        winner = turn.winner
+
+
+        turn.pile_cards
+        turn.award_spoils(winner)
+
+      elsif turn.type == :war
+
+        p "Turn #{@round}: WAR - #{turn.winner} won 6 cards"
+
+        winner = turn.winner
+
+
+        turn.pile_cards
+        turn.award_spoils(winner)
+
+      else
+
+        p "Turn #{@round}: *mutually assured destruction* 6 cards were removed from play"
+
+        winner = turn.winner
+
+
+        turn.pile_cards
+        turn.award_spoils(winner)
+      end
+
+      organize_peace
     end
   end
 end
-#   def start
-#
-#     if @round > 10 do
-#
-#       if @round < 10
-#
-#         turn = Turn.new(@challenger1, @challenger2)
-#
-#         if turn.type == :basic
-#
-#           p "Turn #{@round}: #{turn.winner} won 2 cards"
-#
-#           winner = turn.winner
-#
-#
-#           turn.pile_cards
-#           turn.award_spoils(winner)
-#
-#         elsif turn.type == :war
-#
-#           p "Turn #{@round}: WAR - #{turn.winner} won 6 cards"
-#
-#           winner = turn.winner
-#
-#
-#           turn.pile_cards
-#           turn.award_spoils(winner)
-#
-#         else
-#
-#           p "Turn #{@round}: *mutually assured destruction* 6 cards were removed from play"
-#
-#           winner = turn.winner
-#
-#
-#           turn.pile_cards
-#           turn.award_spoils(winner)
-#         end
-#
-#
-#         if @challenger2.has_lost? == true
-#
-#           p '*~*~*~* #{@challenger1.name} has won the game! *~*~*~*'
-#           break
-#         elsif @challenger1.has_lost? == true
-#
-#           p '*~*~*~* #{@challenger2.name} has won the game! *~*~*~*'
-#           break
-#         else
-#
-#           @round += 1
-#         end
-#     else
-#       p '---- DRAW ----'
-#       break
-#       end
-#     end
-#   end

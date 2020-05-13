@@ -69,10 +69,12 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_start
-    skip
+
     game = Game.new
-    game.shuffle_and_deal
+
     game.start
+
+    require 'pry'; binding.pry
 
   end
 
